@@ -54,7 +54,7 @@
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+  font-family: "Noto Sans JP", -apple-system, BlinkMacSystemFont,
     "Hiragino Sans", Meiryo, sans-serif;
 
   /* グラデーション背景を全画面に固定 */
@@ -112,9 +112,10 @@ body::before {
 }
 
 .header__title {
+  font-family: "Zen Kaku Gothic New", sans-serif;
   font-size: 2.2rem;
-  font-weight: 800;
-  letter-spacing: 0.04em;
+  font-weight: 900;
+  letter-spacing: 0.06em;
 
   /* テキストにグラデーションを適用するテクニック */
   background: var(--gradient-accent);
@@ -435,8 +436,9 @@ body::before {
 
 /* 数値（大きく光る） */
 .card__number {
+  font-family: "Zen Kaku Gothic New", sans-serif;
   font-size: 2.2rem;
-  font-weight: 800;
+  font-weight: 900;
   color: var(--color-accent);
   margin-bottom: 8px;
   line-height: 1;
@@ -481,13 +483,14 @@ body::before {
 }
 
 .content-section__title {
+  font-family: "Zen Kaku Gothic New", sans-serif;
   font-size: 1.4rem;
   font-weight: 700;
   color: var(--color-text);
   margin-bottom: 20px;
   padding-bottom: 10px;
   border-bottom: 1px solid var(--glass-border);
-  letter-spacing: 0.03em;
+  letter-spacing: 0.05em;
 }
 
 /* 機能グリッド */
@@ -507,6 +510,7 @@ body::before {
 }
 
 .feature-item__title {
+  font-family: "Zen Kaku Gothic New", sans-serif;
   font-size: 0.9rem;
   font-weight: 700;
   color: var(--color-text);
