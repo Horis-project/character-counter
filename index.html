@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <!-- ブラウザに「このファイルはHTMLですよ」と伝える宣言 -->
+
+    <!-- 文字コードの指定（日本語を正しく表示するために必須） -->
+    <meta charset="UTF-8" />
+
+    <!-- スマートフォンでも正しく表示するための設定 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- ブラウザのタブに表示されるタイトル -->
+    <title>文字数カウンター</title>
+
+    <!-- style.css を読み込む（見た目はこのファイルで定義） -->
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+
+  <body>
+    <!-- ページ全体を包むコンテナ（中央寄せなどに使う） -->
+    <div class="container">
+
+      <!-- ===== ヘッダー：タイトルと説明 ===== -->
+      <header class="header">
+        <h1 class="header__title">文字数カウンター</h1>
+        <p class="header__description">
+          テキストを入力すると、文字数をリアルタイムで数えます。<br />
+          入力した内容はサーバーに送信されません。
+        </p>
+      </header>
+
+      <!-- ===== メイン：テキストエリア ===== -->
+      <main class="main">
+
+        <!-- ===== SNSプリセット＋上限設定エリア ===== -->
+        <div class="limit-area">
+
+          <!-- SNSプリセットボタン群 -->
+          <!-- data-limit 属性：ボタンに紐づく上限文字数を格納している -->
+          <!-- JavaScriptはこの値を読み取って上限を自動セットする -->
+          <div class="presets">
+            <span class="presets__label">プリセット：</span>
+            <button class="btn btn--preset" data-limit="140">X（旧Twitter）</button>
+            <button class="btn btn--preset" data-limit="2200">Instagram</button>
+            <button class="btn btn--preset" data-limit="2000">note</button>
+            <button class="btn btn--preset" data-limit="200">LINE</button>
+          </div>
+
+          <!-- 上限文字数の手動入力欄 -->
+          <div class="limit-input-group">
+            <label for="limit-input" class="limit-input-group__label">上限文字数：</label>
+            <input
+              id="limit-input"
+              type="number"
+              class="limit-input"
+              placeholder="例: 500"
+              min="1"
+            />
+            <!-- クリアボタン：上限設定を解除する -->
+            <button id="limit-clear-btn" class="btn btn--limit-clear">解除</button>
+          </div>
+
+        </div>
+        <!-- /limit-area -->
+
+        <!-- テキストを入力する大きな欄 -->
+        <!-- id="input-text" で JavaScript から操作するための名前をつける -->
+        <textarea
+          id="input-text"
+          class="textarea"
+          placeholder="ここにテキストを入力または貼り付けてください..."
+        ></textarea>
+
+        <!-- クリアボタン：テキストエリアの内容を全消去する -->
+        <div class="button-area">
+          <button id="clear-btn" class="btn btn--clear">クリア</button>
+        </div>
+
+        <!-- ===== プログレスバーエリア ===== -->
+        <!-- 上限が設定されていないときは非表示（JSで制御する） -->
+        <div id="progress-area" class="progress-area progress-area--hidden">
+
+          <!-- 使用率テキスト表示（例：「140 / 280文字 (50%）」） -->
+          <div class="progress-info">
+            <span id="progress-text" class="progress-info__text"></span>
+            <span id="progress-percent" class="progress-info__percent"></span>
+          </div>
+
+          <!-- プログレスバー本体 -->
+          <!-- progress-bar__fill の width を JS で動的に変える -->
+          <div class="progress-bar">
+            <div id="progress-fill" class="progress-bar__fill"></div>
+          </div>
+
+        </div>
+        <!-- /progress-area -->
+
+        <!-- ===== カウント結果を表示するカードエリア ===== -->
+        <!-- カードを横並びにするために cards というクラスを使う -->
+        <div class="cards">
+
+          <!-- カード1：総文字数 -->
+          <div class="card">
+            <!-- id="total-chars" に JavaScript が数値を書き込む。初期値は 0 -->
+            <span id="total-chars" class="card__number">0</span>
+            <span class="card__label">文字数</span>
+            <span class="card__description">スペース・改行を含む</span>
+          </div>
+
+          <!-- カード2：スペース・改行を除いた文字数 -->
+          <div class="card">
+            <span id="no-space-chars" class="card__number">0</span>
+            <span class="card__label">文字数（空白除外）</span>
+            <span class="card__description">スペース・改行を除いた実質文字数</span>
+          </div>
+
+          <!-- カード3：行数 -->
+          <div class="card">
+            <span id="lines" class="card__number">0</span>
+            <span class="card__label">行数</span>
+            <span class="card__description">改行で区切られた行の数</span>
+          </div>
+
+        </div>
+        <!-- /cards -->
+
+      </main>
+      <!-- /main -->
+
+      <!-- ===== フッター：補足情報 ===== -->
+      <footer class="footer">
+        <p>入力されたテキストはサーバーに送信されません（すべてブラウザ内で処理）</p>
+      </footer>
+
+    </div>
+    <!-- /container -->
+
+    <!-- JavaScript ファイルを読み込む -->
+    <!-- body の一番下に書くのがポイント：HTML が全部読み込まれてから JS を動かすため -->
+    <script src="js/counter.js"></script>
+  </body>
+</html>

@@ -1,0 +1,521 @@
+/* =============================================
+   文字数カウンター - スタイルシート
+   =============================================
+   このファイルはページの「見た目」を担当します。
+   HTMLが「骨格」なら、CSSは「服（デザイン）」です。
+============================================= */
+
+
+/* =============================================
+   1. デザイン変数（色・サイズの定義）
+   =============================================
+   CSS変数（カスタムプロパティ）を使うと、
+   色やサイズを一箇所で管理できます。
+   変更したいときは、ここだけ直せばOKです。
+============================================= */
+:root {
+  /* 色 */
+  --color-bg: #f4f6f9;           /* ページ全体の背景色（薄いグレー） */
+  --color-white: #ffffff;        /* 白 */
+  --color-primary: #4a90d9;      /* メインカラー（青） */
+  --color-text: #333333;         /* 本文のテキスト色（濃いグレー） */
+  --color-text-light: #888888;   /* 薄いテキスト色（説明文など） */
+  --color-border: #dde3ec;       /* 枠線の色 */
+
+  /* サイズ */
+  --radius: 10px;                /* 角丸の大きさ */
+  --shadow: 0 2px 12px rgba(0, 0, 0, 0.08); /* カードの影 */
+}
+
+
+/* =============================================
+   2. リセット・ベーススタイル
+   =============================================
+   ブラウザのデフォルトスタイルを統一します。
+   これを書かないと、ブラウザによって見た目が
+   バラバラになってしまいます。
+============================================= */
+
+/* すべての要素に適用するリセット */
+* {
+  /* デフォルトの余白をリセット */
+  margin: 0;
+  padding: 0;
+
+  /* box-sizing: border-border にすると
+     「幅の計算にpaddingとborderを含める」設定になり
+     レイアウト計算が直感的になります */
+  box-sizing: border-box;
+}
+
+/* body：ページ全体の基本スタイル */
+body {
+  /* フォントファミリー：読みやすい日本語フォントを指定 */
+  font-family: -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+    "Hiragino Sans", Meiryo, sans-serif;
+
+  /* 背景色（変数を使って参照） */
+  background-color: var(--color-bg);
+
+  /* テキスト色 */
+  color: var(--color-text);
+
+  /* 行の高さ（1.6 = フォントサイズの1.6倍）*/
+  line-height: 1.6;
+}
+
+
+/* =============================================
+   3. レイアウト
+   =============================================
+   ページ全体の構造を決めます。
+============================================= */
+
+/* コンテナ：中央寄せ＋最大幅の制限 */
+.container {
+  /* 最大幅を800pxに制限（大きな画面でも読みやすく） */
+  max-width: 800px;
+
+  /* margin: 上下 左右 → 左右autoで中央寄せ */
+  margin: 0 auto;
+
+  /* 左右の余白 */
+  padding: 0 20px;
+}
+
+
+/* =============================================
+   4. ヘッダー
+============================================= */
+.header {
+  /* 上下の余白 */
+  padding: 40px 0 30px;
+
+  /* テキストを中央揃えに */
+  text-align: center;
+}
+
+/* タイトル（h1） */
+.header__title {
+  font-size: 2rem;       /* 32px相当 */
+  font-weight: bold;
+  color: var(--color-primary);
+  margin-bottom: 10px;
+}
+
+/* サブタイトル説明文 */
+.header__description {
+  font-size: 0.9rem;
+  color: var(--color-text-light);
+
+  /* 行の高さを少し広げて読みやすく */
+  line-height: 1.8;
+}
+
+
+/* =============================================
+   5. テキストエリア
+============================================= */
+
+/* テキスト入力欄 */
+.textarea {
+  /* 幅100%（親要素いっぱいに広げる） */
+  width: 100%;
+
+  /* 高さ */
+  height: 220px;
+
+  /* 内側の余白 */
+  padding: 16px;
+
+  /* 枠線 */
+  border: 2px solid var(--color-border);
+
+  /* 角丸 */
+  border-radius: var(--radius);
+
+  /* フォントを本文と同じに（指定しないとブラウザ既定のフォントになる） */
+  font-family: inherit;
+  font-size: 1rem;
+
+  /* テキストの色 */
+  color: var(--color-text);
+
+  /* 背景色 */
+  background-color: var(--color-white);
+
+  /* リサイズ：縦方向のみユーザーが広げられる（横は崩れるのでなし） */
+  resize: vertical;
+
+  /* なめらかなアニメーション（後述のフォーカス時に使う） */
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+/* フォーカス時（クリックして選択された状態） */
+.textarea:focus {
+  /* デフォルトのアウトラインを消す（自分でスタイルを付けるため） */
+  outline: none;
+
+  /* 枠線の色をメインカラーに変える */
+  border-color: var(--color-primary);
+
+  /* 薄い青い光を追加して「選択中」とわかりやすく */
+  box-shadow: 0 0 0 3px rgba(74, 144, 217, 0.15);
+}
+
+
+/* =============================================
+   6. ボタンエリア
+============================================= */
+
+/* ボタンを右寄せに */
+.button-area {
+  /* Flexboxで右寄せ */
+  display: flex;
+  justify-content: flex-end;
+
+  /* テキストエリアとの間隔 */
+  margin-top: 10px;
+  margin-bottom: 24px;
+}
+
+/* ボタン共通スタイル */
+.btn {
+  /* paddingで大きさを調整 */
+  padding: 8px 20px;
+
+  /* 枠線なし */
+  border: none;
+
+  /* 角丸 */
+  border-radius: 6px;
+
+  /* フォントサイズ */
+  font-size: 0.9rem;
+
+  /* カーソルをポインターに（クリックできることを示す） */
+  cursor: pointer;
+
+  /* なめらかなアニメーション */
+  transition: background-color 0.2s, opacity 0.2s;
+}
+
+/* クリアボタン専用スタイル */
+.btn--clear {
+  background-color: #e8ecf1;
+  color: var(--color-text-light);
+}
+
+/* クリアボタン：ホバー時（マウスが乗ったとき） */
+.btn--clear:hover {
+  background-color: #d8dee8;
+  color: var(--color-text);
+}
+
+/* ボタン：クリック時 */
+.btn:active {
+  /* 少し透明にして「押した」感を出す */
+  opacity: 0.7;
+}
+
+
+/* =============================================
+   7. カウントカード
+============================================= */
+
+/* カードを横に3列並べるコンテナ */
+.cards {
+  /* CSS Grid：要素を格子状に並べるレイアウト */
+  display: grid;
+
+  /* 3列均等に並べる（1fr = 利用可能なスペースを均等割り） */
+  grid-template-columns: repeat(3, 1fr);
+
+  /* カード間の隙間 */
+  gap: 16px;
+
+  /* 下の余白 */
+  margin-bottom: 40px;
+}
+
+/* 個別カードのスタイル */
+.card {
+  /* 背景を白に */
+  background-color: var(--color-white);
+
+  /* 角丸 */
+  border-radius: var(--radius);
+
+  /* 影（変数を参照） */
+  box-shadow: var(--shadow);
+
+  /* 内側の余白 */
+  padding: 24px 20px;
+
+  /* 縦方向に中央寄せ */
+  display: flex;
+  flex-direction: column;   /* 子要素を縦に並べる */
+  align-items: center;      /* 横方向：中央 */
+  text-align: center;
+
+  /* なめらかなアニメーション */
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+/* カード：ホバー時（マウスが乗ったとき） */
+.card:hover {
+  /* 少し浮き上がる演出 */
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+}
+
+/* 数値（大きく目立つ数字） */
+.card__number {
+  /* 大きなフォントサイズ */
+  font-size: 2.5rem;  /* 40px相当 */
+  font-weight: bold;
+  color: var(--color-primary);
+
+  /* 下の余白 */
+  margin-bottom: 8px;
+
+  /* 数値が変わるとき、なめらかに変化（オプション） */
+  transition: color 0.2s;
+}
+
+/* ラベル（「文字数」などの見出し） */
+.card__label {
+  font-size: 0.95rem;
+  font-weight: bold;
+  color: var(--color-text);
+  margin-bottom: 4px;
+}
+
+/* 説明文（カードの補足説明） */
+.card__description {
+  font-size: 0.75rem;
+  color: var(--color-text-light);
+}
+
+
+/* =============================================
+   8. フッター
+============================================= */
+.footer {
+  /* 上下の余白 */
+  padding: 20px 0 40px;
+
+  /* 中央揃え */
+  text-align: center;
+
+  /* 枠線（上だけ） */
+  border-top: 1px solid var(--color-border);
+}
+
+.footer p {
+  font-size: 0.8rem;
+  color: var(--color-text-light);
+}
+
+
+/* =============================================
+   9. SNSプリセット＋上限設定エリア
+============================================= */
+
+/* プリセット・上限入力をまとめた外枠 */
+.limit-area {
+  /* 白いカード風のボックス */
+  background-color: var(--color-white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 16px 20px;
+  margin-bottom: 16px;
+
+  /* 縦に2段（プリセット行 / 上限入力行）並べる */
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* SNSプリセットボタン行 */
+.presets {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;  /* ボタンが多くても折り返す */
+  gap: 8px;
+}
+
+/* 「プリセット：」ラベル */
+.presets__label {
+  font-size: 0.85rem;
+  color: var(--color-text-light);
+  white-space: nowrap; /* 折り返さない */
+}
+
+/* プリセットボタン */
+.btn--preset {
+  background-color: #eef4fb;
+  color: var(--color-primary);
+  border: 1px solid #c5daf5;
+  font-size: 0.85rem;
+  padding: 5px 14px;
+  border-radius: 20px; /* 丸みを強くしてピル型に */
+}
+
+.btn--preset:hover {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  border-color: var(--color-primary);
+}
+
+/* アクティブ（選択中）のプリセットボタン */
+/* JSで .btn--preset--active クラスを付け外しする */
+.btn--preset--active {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  border-color: var(--color-primary);
+}
+
+/* 上限文字数の入力行 */
+.limit-input-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.limit-input-group__label {
+  font-size: 0.85rem;
+  color: var(--color-text-light);
+  white-space: nowrap;
+}
+
+/* 数値入力フィールド */
+.limit-input {
+  width: 120px;
+  padding: 6px 10px;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  font-size: 0.9rem;
+  color: var(--color-text);
+  transition: border-color 0.2s;
+}
+
+.limit-input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+}
+
+/* 上限解除ボタン */
+.btn--limit-clear {
+  background-color: transparent;
+  color: var(--color-text-light);
+  border: 1px solid var(--color-border);
+  font-size: 0.8rem;
+  padding: 5px 12px;
+}
+
+.btn--limit-clear:hover {
+  background-color: #f0f0f0;
+  color: var(--color-text);
+}
+
+
+/* =============================================
+   10. プログレスバー
+============================================= */
+
+/* プログレスバー全体のコンテナ */
+.progress-area {
+  margin-bottom: 20px;
+  background-color: var(--color-white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 14px 20px;
+
+  /* 表示・非表示アニメーション */
+  transition: opacity 0.3s;
+}
+
+/* 非表示状態（上限が未設定のとき） */
+/* display:none だとアニメーションできないので visibility と height で制御する */
+.progress-area--hidden {
+  display: none;
+}
+
+/* 使用率テキスト行（「○○ / △△文字 (XX%)」） */
+.progress-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 8px;
+}
+
+.progress-info__text {
+  font-size: 0.85rem;
+  color: var(--color-text-light);
+}
+
+.progress-info__percent {
+  font-size: 1rem;
+  font-weight: bold;
+  color: var(--color-primary);
+  transition: color 0.3s;
+}
+
+/* バー外枠（グレーの背景） */
+.progress-bar {
+  width: 100%;
+  height: 10px;
+  background-color: #e8ecf1;
+  border-radius: 999px; /* 完全な丸み */
+  overflow: hidden;     /* 内側のバーがはみ出さないように */
+}
+
+/* バー内側の塗り（実際に伸び縮みする部分） */
+.progress-bar__fill {
+  height: 100%;
+  width: 0%;              /* 初期値 0%。JSで動的に変える */
+  background-color: var(--color-primary);
+  border-radius: 999px;
+  transition: width 0.3s ease, background-color 0.3s; /* なめらかに変化 */
+}
+
+/* 警告状態（100%超過）：バーと%テキストが赤くなる */
+/* JSで .progress-bar__fill--over クラスを付け外しする */
+.progress-bar__fill--over {
+  background-color: #e05252;
+}
+
+.progress-info__percent--over {
+  color: #e05252;
+}
+
+/* 警告状態：カード1（文字数）の数値も赤くする */
+/* JSで .card__number--over クラスを付け外しする */
+.card__number--over {
+  color: #e05252;
+}
+
+
+/* =============================================
+   11. レスポンシブデザイン（スマートフォン対応）
+   =============================================
+   @media はブラウザの幅に応じてスタイルを変える書き方です。
+   「幅が600px以下のとき」という条件を設定しています。
+============================================= */
+@media (max-width: 600px) {
+  /* スマホ時：タイトルを小さくする */
+  .header__title {
+    font-size: 1.5rem;
+  }
+
+  /* スマホ時：カードを1列縦並びに変更 */
+  .cards {
+    grid-template-columns: 1fr;  /* 1列 */
+  }
+
+  /* スマホ時：テキストエリアを少し低くする */
+  .textarea {
+    height: 180px;
+  }
+}
