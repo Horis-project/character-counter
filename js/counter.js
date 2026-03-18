@@ -41,6 +41,10 @@ const presetBtns = document.querySelectorAll('.btn--preset');
 // 総文字数カードの数値部分（超過時に赤くするため取得しておく）
 const totalCharsCard = document.querySelector('#total-chars');
 
+// 読了時間・原稿用紙換算の表示要素
+const readingTimeEl = document.getElementById('reading-time'); // 読了時間
+const manuscriptEl  = document.getElementById('manuscript');   // 原稿用紙換算
+
 
 /* =============================================
    2. 状態（State）管理
@@ -99,11 +103,33 @@ function countAll(text) {
   const lines = text === '' ? 0 : text.split('\n').length;
 
 
+  // ── 読了時間 ──────────────────────────────
+  // 日本語の平均読書速度は約400文字/分といわれています
+  // 総文字数 ÷ 400 で読了時間（分）を計算します
+  // Math.ceil() は小数点以下を切り上げる
+  //   例: 500文字 → 500 / 400 = 1.25 → 切り上げて 2分
+  //   例: 400文字 → 400 / 400 = 1.0  → 1分
+  //   例: 0文字   → 0   / 400 = 0    → 0分
+  const readingTime = totalChars === 0 ? 0 : Math.ceil(totalChars / 400);
+
+
+  // ── 原稿用紙換算 ──────────────────────────
+  // 一般的な400字詰め原稿用紙（20字 × 20行）での枚数を計算します
+  // 空白除外文字数（実質文字数）を使って計算するのが一般的です
+  // Math.ceil() で小数点以下を切り上げ（0.5枚 → 1枚と数える）
+  //   例: 800文字 → 800 / 400 = 2.0 → 2枚
+  //   例: 500文字 → 500 / 400 = 1.25 → 切り上げて 2枚
+  //   例: 0文字   → 0   / 400 = 0   → 0枚
+  const manuscript = noSpaceChars === 0 ? 0 : Math.ceil(noSpaceChars / 400);
+
+
   // 結果をオブジェクト（名前付きのデータの集まり）として返す
   return {
     totalChars,    // 総文字数
     noSpaceChars,  // 空白除外文字数
     lines,         // 行数
+    readingTime,   // 読了時間（分）
+    manuscript,    // 原稿用紙換算（枚）
   };
 }
 
@@ -128,6 +154,16 @@ function updateDisplay(counts) {
   totalCharsEl.textContent   = counts.totalChars.toLocaleString();
   noSpaceCharsEl.textContent = counts.noSpaceChars.toLocaleString();
   linesEl.textContent        = counts.lines.toLocaleString();
+
+  // ── 読了時間の表示更新 ──
+  // innerHTML を使うのは、数値の後ろに <span> タグの単位を含むため
+  // ※ textContent だとタグが文字列として表示されてしまう
+  readingTimeEl.innerHTML =
+    `${counts.readingTime.toLocaleString()}<span class="card__number-unit">分</span>`;
+
+  // ── 原稿用紙換算の表示更新 ──
+  manuscriptEl.innerHTML =
+    `${counts.manuscript.toLocaleString()}<span class="card__number-unit">枚</span>`;
 
   // 上限が設定されているときは、プログレスバーも更新する
   if (currentLimit !== null) {

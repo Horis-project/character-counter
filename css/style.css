@@ -223,13 +223,13 @@ body {
    7. カウントカード
 ============================================= */
 
-/* カードを横に3列並べるコンテナ */
+/* カードを横に5列並べるコンテナ */
 .cards {
   /* CSS Grid：要素を格子状に並べるレイアウト */
   display: grid;
 
-  /* 3列均等に並べる（1fr = 利用可能なスペースを均等割り） */
-  grid-template-columns: repeat(3, 1fr);
+  /* 5列均等に並べる（1fr = 利用可能なスペースを均等割り） */
+  grid-template-columns: repeat(5, 1fr);
 
   /* カード間の隙間 */
   gap: 16px;
@@ -295,6 +295,14 @@ body {
 .card__description {
   font-size: 0.75rem;
   color: var(--color-text-light);
+}
+
+/* 数値の後ろにつく単位テキスト（「分」「枚」など） */
+/* card__number の中にネストして使う */
+.card__number-unit {
+  font-size: 1.2rem;  /* 数値より小さく */
+  font-weight: normal;
+  margin-left: 2px;
 }
 
 
@@ -509,9 +517,9 @@ body {
     font-size: 1.5rem;
   }
 
-  /* スマホ時：カードを1列縦並びに変更 */
+  /* スマホ時：カードを2列に変更（5列だと小さすぎるため） */
   .cards {
-    grid-template-columns: 1fr;  /* 1列 */
+    grid-template-columns: repeat(2, 1fr);  /* 2列 */
   }
 
   /* スマホ時：テキストエリアを少し低くする */

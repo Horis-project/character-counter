@@ -41,6 +41,7 @@
           <div class="presets">
             <span class="presets__label">プリセット：</span>
             <button class="btn btn--preset" data-limit="140">X（旧Twitter）</button>
+            <button class="btn btn--preset" data-limit="500">Threads</button>
             <button class="btn btn--preset" data-limit="2200">Instagram</button>
             <button class="btn btn--preset" data-limit="2000">note</button>
             <button class="btn btn--preset" data-limit="200">LINE</button>
@@ -119,6 +120,22 @@
             <span id="lines" class="card__number">0</span>
             <span class="card__label">行数</span>
             <span class="card__description">改行で区切られた行の数</span>
+          </div>
+
+          <!-- カード4：読了時間 -->
+          <!-- 400文字/分（日本語の平均読書速度）で計算 -->
+          <div class="card">
+            <span id="reading-time" class="card__number">0<span class="card__number-unit">分</span></span>
+            <span class="card__label">読了時間</span>
+            <span class="card__description">約400文字/分で計算</span>
+          </div>
+
+          <!-- カード5：原稿用紙換算 -->
+          <!-- 400字詰め原稿用紙（20字×20行）で計算 -->
+          <div class="card">
+            <span id="manuscript" class="card__number">0<span class="card__number-unit">枚</span></span>
+            <span class="card__label">原稿用紙</span>
+            <span class="card__description">400字詰め換算</span>
           </div>
 
         </div>
