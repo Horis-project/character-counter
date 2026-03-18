@@ -126,17 +126,6 @@ body::before {
   margin-bottom: 12px;
 }
 
-.header__title-sub {
-  display: block;
-  font-size: 1rem;
-  font-weight: 400;
-  letter-spacing: 0.03em;
-  margin-top: 6px;
-  background: none;
-  -webkit-background-clip: unset;
-  -webkit-text-fill-color: rgba(255, 255, 255, 0.6);
-  background-clip: unset;
-}
 
 .header__description {
   font-size: 0.88rem;
