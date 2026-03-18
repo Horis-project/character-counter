@@ -1,0 +1,79 @@
+/* プライバシーポリシーページ用スタイル */
+
+.privacy-body {
+  padding: 32px 36px;
+  margin-bottom: 16px;
+}
+
+.privacy-section {
+  margin-bottom: 32px;
+}
+
+.privacy-section:last-child {
+  margin-bottom: 0;
+}
+
+.privacy-section__title {
+  font-family: "Zen Kaku Gothic New", sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-accent);
+  margin-bottom: 10px;
+  letter-spacing: 0.04em;
+}
+
+.privacy-section p {
+  font-size: 0.88rem;
+  color: var(--color-text-sub);
+  line-height: 1.9;
+  margin-bottom: 8px;
+}
+
+.privacy-section p:last-child {
+  margin-bottom: 0;
+}
+
+.privacy-section strong {
+  color: var(--color-text);
+}
+
+.privacy-list {
+  list-style: none;
+  margin-top: 8px;
+  padding-left: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.privacy-list li {
+  font-size: 0.88rem;
+  color: var(--color-text-sub);
+  padding-left: 16px;
+  position: relative;
+}
+
+.privacy-list li::before {
+  content: '–';
+  position: absolute;
+  left: 0;
+  color: var(--color-text-muted);
+}
+
+.privacy-link {
+  color: var(--color-accent);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(0, 210, 255, 0.3);
+  padding-bottom: 1px;
+  transition: border-color 0.2s;
+}
+
+.privacy-link:hover {
+  border-color: var(--color-accent);
+}
+
+@media (max-width: 600px) {
+  .privacy-body {
+    padding: 20px 18px;
+  }
+}

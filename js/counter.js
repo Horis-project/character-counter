@@ -26,6 +26,9 @@ const linesEl         = document.getElementById('lines');           // 行数
 // クリアボタン
 const clearBtn = document.getElementById('clear-btn');
 
+// コピーボタン
+const copyBtn = document.getElementById('copy-btn');
+
 // ── 追加：上限機能に関係する要素 ──
 const limitInput    = document.getElementById('limit-input');     // 上限数値の入力欄
 const limitClearBtn = document.getElementById('limit-clear-btn'); // 上限解除ボタン
@@ -318,6 +321,21 @@ textarea.addEventListener('input', function() {
 
   // 画面を更新（プログレスバーも内部で更新される）
   updateDisplay(counts);
+});
+
+
+// ── コピーボタン：テキストをクリップボードにコピー ──
+copyBtn.addEventListener('click', function() {
+  if (textarea.value === '') return;
+
+  navigator.clipboard.writeText(textarea.value).then(function() {
+    copyBtn.textContent = 'コピーしました！';
+    copyBtn.classList.add('btn--copy--done');
+    setTimeout(function() {
+      copyBtn.textContent = 'コピー';
+      copyBtn.classList.remove('btn--copy--done');
+    }, 2000);
+  });
 });
 
 
