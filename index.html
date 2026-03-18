@@ -33,7 +33,7 @@
       <main class="main">
 
         <!-- ===== SNSプリセット＋上限設定エリア ===== -->
-        <div class="limit-area">
+        <div class="limit-area glass-card">
 
           <!-- SNSプリセットボタン群 -->
           <!-- data-limit 属性：ボタンに紐づく上限文字数を格納している -->
@@ -79,7 +79,7 @@
 
         <!-- ===== プログレスバーエリア ===== -->
         <!-- 上限が設定されていないときは非表示（JSで制御する） -->
-        <div id="progress-area" class="progress-area progress-area--hidden">
+        <div id="progress-area" class="progress-area glass-card progress-area--hidden">
 
           <!-- 使用率テキスト表示（例：「140 / 280文字 (50%）」） -->
           <div class="progress-info">
@@ -101,38 +101,35 @@
         <div class="cards">
 
           <!-- カード1：総文字数 -->
-          <div class="card">
-            <!-- id="total-chars" に JavaScript が数値を書き込む。初期値は 0 -->
+          <div class="card glass-card">
             <span id="total-chars" class="card__number">0</span>
             <span class="card__label">文字数</span>
             <span class="card__description">スペース・改行を含む</span>
           </div>
 
           <!-- カード2：スペース・改行を除いた文字数 -->
-          <div class="card">
+          <div class="card glass-card">
             <span id="no-space-chars" class="card__number">0</span>
             <span class="card__label">文字数（空白除外）</span>
             <span class="card__description">スペース・改行を除いた実質文字数</span>
           </div>
 
           <!-- カード3：行数 -->
-          <div class="card">
+          <div class="card glass-card">
             <span id="lines" class="card__number">0</span>
             <span class="card__label">行数</span>
             <span class="card__description">改行で区切られた行の数</span>
           </div>
 
           <!-- カード4：読了時間 -->
-          <!-- 400文字/分（日本語の平均読書速度）で計算 -->
-          <div class="card">
+          <div class="card glass-card">
             <span id="reading-time" class="card__number">0<span class="card__number-unit">分</span></span>
             <span class="card__label">読了時間</span>
             <span class="card__description">約400文字/分で計算</span>
           </div>
 
           <!-- カード5：原稿用紙換算 -->
-          <!-- 400字詰め原稿用紙（20字×20行）で計算 -->
-          <div class="card">
+          <div class="card glass-card">
             <span id="manuscript" class="card__number">0<span class="card__number-unit">枚</span></span>
             <span class="card__label">原稿用紙</span>
             <span class="card__description">400字詰め換算</span>
