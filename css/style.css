@@ -126,6 +126,15 @@ body::before {
   margin-bottom: 12px;
 }
 
+.header__title-sub {
+  display: block;
+  font-size: 1rem;
+  font-weight: 400;
+  letter-spacing: 0.03em;
+  margin-top: 6px;
+  opacity: 0.75;
+}
+
 .header__description {
   font-size: 0.88rem;
   color: var(--color-text-sub);
